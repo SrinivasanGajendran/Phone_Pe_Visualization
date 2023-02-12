@@ -2,30 +2,47 @@ import streamlit as st
 import mysql.connector
 import pandas as pd
 import plotly.express as px
-import Aggregated_Transaction
-
+import main
 conn = mysql.connector.connect(
-            host="localhost",
-            user="srini",
-            password="password",
-            database="Phone_pe"
-        )
+    host="localhost",
+    user="srini",
+    password="password"
+    )
+# Create a cursor object
+cursor = conn.cursor()
+# Check if the database exists
+sql = "SHOW DATABASES LIKE 'Phone_Pe'"
+cursor.execute(sql)
+result = cursor.fetchone()
+if result:
+    conn = mysql.connector.connect(
+        host="localhost",
+        user="srini",
+        password="password",
+        database="Phone_Pe"
+    )
+else:
+    sql = "CREATE DATABASE Phone_Pe"
+    cursor.execute(sql)
+    conn = mysql.connector.connect(
+        host="localhost",
+        user="srini",
+        password="password",
+        database="Phone_Pe"
+    )
+    main.create()
 cursor = conn.cursor()
 st.set_page_config(page_title="Phone_Pe",page_icon=":tada",layout='wide')
 header = st.container()
 df = pd.read_sql_query("SELECT DISTINCT State FROM Aggregate_Transaction", conn)
-
 with header:
     st.title("Phone_Pe Data visualization:-")
     st.subheader("Phonepe Pulse Data Visualization and Exploration:A User-Friendly Tool Using Streamlit and Plotly")
-
 col1,col2,col3 = st.columns(3)
-
 with col1:
     States = st.selectbox('States',(df))
 with col2:
     Year = st.selectbox('Year', ('2018', '2019', '2020', '2021', '2022'))
-
 colm1,colm2,colm3 = st.columns(3)
 co1,co2,co3 = st.columns(3)
 
@@ -115,15 +132,14 @@ def district(selected_options):
         st.write(fig)
 
 with col3 :
+    st.write('\n')
+    st.write('\n')
     if st.button('Submit'):
         selected_options= [States,Year]
         Transaction(selected_options)
         User(selected_options)
         district(selected_options)
 
-
-
-Aggregated_Transaction.Aggregated_Transaction()
 conn.commit()
 cursor.close()
 conn.close()
