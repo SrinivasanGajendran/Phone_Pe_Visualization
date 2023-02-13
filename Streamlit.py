@@ -30,7 +30,7 @@ else:
         password="password",
         database="Phone_Pe"
     )
-    main.create()
+    Combined_File.create()
 cursor = conn.cursor()
 st.set_page_config(page_title="Phone_Pe",page_icon=":tada",layout='wide')
 header = st.container()
