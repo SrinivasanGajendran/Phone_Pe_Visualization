@@ -7,7 +7,7 @@ Download the github repo using **requests,os,json,git** package in python and st
 
 ```
 import os
-os.environ["GIT_PYTHON_REFRESH"] = "quiet"
+**os.environ["GIT_PYTHON_REFRESH"] = "quiet"**
 import git
 def check():
         url = "https://api.github.com/repos/PhonePe/pulse"
@@ -24,6 +24,10 @@ def check():
 We have to connect to our DB to store the data which we got from the github. I have created separate files for each type of data which i am going to diplay for the users.
 Before creating the tables we need to check whether the database already exist or not, if not we need to create and connect to it. 
 **Table_Names: ____Aggregated_transaction,Aggregated_user,map_Transaction,Map_User,Top_transaction,Top_User___
+
+```
+**Eg: CREATE TABLE Aggregate_Transaction (ID  INTEGER  AUTO_INCREMENT PRIMARY  KEY, State TEXT,YEAR INTEGER ,Type_Of_Transaction TEXT, Total INTEGER, Amount REAL)")**
+```
 
 **Step-3:**
 We will be Using Mysql-Connector in python to connect with the database then we will check for the **.json** files in the folders using **os** package and start extracting the required data and create a table insert it.
