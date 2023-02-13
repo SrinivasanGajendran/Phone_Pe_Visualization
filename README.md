@@ -54,3 +54,6 @@ ___Packages_Used_From_Python:-___
 *import plotly.express
 
 ***Database : Mysql***
+
+**Execution:** All the created files will be stored in the same environment where the Streamlit file is present. So start running the **Streamlit.py** file first
+to run the streamit am using __Anconda Navigator__ **(https://docs.anaconda.com/anaconda/install/windows/)** installation link is provided.
