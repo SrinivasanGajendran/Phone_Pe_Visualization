@@ -23,15 +23,15 @@ def check():
 **Step-2:**
 We have to connect to our DB to store the data which we got from the github. I have created separate files for each type of data which i am going to diplay for the users.
 Before creating the tables we need to check whether the database already exist or not, if not we need to create and connect to it. 
-**Table_Names:** ____Aggregated_transaction,Aggregated_user,map_Transaction,Map_User,Top_transaction,Top_User___
+**Table_Names:** ____Aggregated_transaction,Aggregated_user,Top_transaction_district,Top_User_district,top_user_pincode___
 
-**Eg: CREATE TABLE Aggregate_Transaction (ID  INTEGER  AUTO_INCREMENT PRIMARY  KEY, State TEXT,YEAR INTEGER ,Type_Of_Transaction TEXT, Total INTEGER, Amount REAL)")**
+**Eg: CREATE TABLE Aggregate_Transaction (ID  INTEGER  AUTO_INCREMENT PRIMARY  KEY, State TEXT,YEAR INTEGER, Quarter INTEGER,Type_Of_Transaction TEXT, Total INTEGER, Amount REAL)")**
 
 
 **Step-3:**
 We will be Using Mysql-Connector in python to connect with the database then we will check for the **.json** files in the folders using **os** package and start extracting the required data and create a table insert it.
 
-**Eg: df = pd.read_sql_query(f"""SELECT DISTINCT State,YEAR ,Type_Of_Transaction, Total, Amount FROM Aggregate_Transaction WHERE State = "{States}" AND YEAR = "{Year}" """, conn)**
+**Eg: df = pd.read_sql_query(f"""SELECT State,YEAR ,Type_Of_Transaction, Total, Amount FROM Aggregate_Transaction WHERE State = "{States}" AND YEAR = "{Year} AND Quarter = {Quarter}" """, conn)**
 
 Stored in dataframe and connected with database (conn).
 
@@ -39,19 +39,20 @@ Stored in dataframe and connected with database (conn).
 After extracting all the data we will create a dashboard using **Streamlit** and retrieves the data from the created tables to present it in the platform and include pie & Bar charts.
 
 **Step-5:**
-Now we will create a file name **combined** which holds all the other files once it is called all the file's will start to execute.
+Now we will create a file name **main** which holds all the other files once it is called all the file's will start to execute.
 
 **Step-6**
-this **Combined** will be called in the **Streamlit** file.
+this **main** will be called in the **Streamlit** file.
 
 ___Packages_Used_From_Python:-___
 *import os
-*import muysql-connector
+*import mysql-connector
 *import streamlit
 *import json
 *import git
 *import pandas
 *import plotly.express
+
 
 ***Database : Mysql***
 
